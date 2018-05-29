@@ -1,7 +1,7 @@
 # Личный проект «Пиксель хантер» [![Build status][travis-image]][travis-url]
 
 * Студент: [Анна Куренкова](https://up.htmlacademy.ru/ecmascript/5/user/165732).
-* Наставник: `Евгений Сальников`.
+* Наставник: [Евгений Сальников](https://htmlacademy.ru/profile/id24537).
 
 ---
 
