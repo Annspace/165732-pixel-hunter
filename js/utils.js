@@ -1,6 +1,6 @@
 // utils.js
 
-export const show = (htmlString) => {
+export const render = (htmlString) => {
   const wrapper = document.createElement(`div`);
   wrapper.innerHTML = htmlString;
   return wrapper;
@@ -14,4 +14,13 @@ export const changeScreen = (element) => {
     mainScreen.removeChild(mainScreen.firstChild);
   }
   mainScreen.appendChild(element);
+};
+
+export const fragmentToString = (fragmentId) => {
+  const fragment = document.querySelector(`#${fragmentId}`);
+  const clonedFragment = fragment.content.cloneNode(true);
+  const div = document.createElement(`div`);
+  div.appendChild(clonedFragment);
+
+  return div.innerHTML;
 };

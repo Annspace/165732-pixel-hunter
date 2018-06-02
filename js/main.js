@@ -8,5 +8,3 @@ const introButton = document.querySelector(`.intro__asterisk`);
 introButton.addEventListener(`click`, () => {
   changeScreen(greeting);
 });
-
-console.log(greeting);
