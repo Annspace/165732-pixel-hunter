@@ -1,17 +1,3 @@
-let answers = [];
-
-class Answer {
-  constructor(time, success) {
-    this.time = time;
-    this.success = success;
-  }
-}
-
-for (let i = 0; i < 30; i++) {
-  answers[i] = new Answer(25000, false);
-}
-
-export default answers;
 
 export const pointsCounter = (answersArray, life) => {
   let points = 0;
