@@ -1,36 +1,70 @@
 import {assert} from 'chai';
-import {pointsCounter} from './pointsCounter';
+import {CORRECT_POINT, pointsCounter} from './pointsCounter';
+import {FAST_CORRECT_POINT, SLOW_CORRECT_POINT, LIVES, LIVE_POINT, FAIL_POINT, MEDIUM_TIME_POINT} from './pointsCounter';
 import {Timer} from './timer';
-import {Answer, generateAnswersArray} from './answer';
 
 describe(`Check points`, () => {
+  const NUMBER_OF_ANSWERS = 10;
+  const FAST_TIME_POINTS = NUMBER_OF_ANSWERS * (CORRECT_POINT + FAST_CORRECT_POINT) + LIVES * LIVE_POINT;
+  const SLOW_TIME_POINTS = NUMBER_OF_ANSWERS * (CORRECT_POINT - SLOW_CORRECT_POINT) + LIVES * LIVE_POINT;
+  const wrongAnswer = {
+    correct: false,
+    time: 22000,
+  };
+  const mediumTimeAnswer = {
+    correct: true,
+    time: 11000,
+  };
+  const fastTimeAnswer = {
+    correct: true,
+    time: 9000,
+  };
+  const slowTimeAnswer = {
+    correct: true,
+    time: 25000,
+  };
+  const failedAnswers = Array(NUMBER_OF_ANSWERS).fill(wrongAnswer);
+  const mediumTimeAnswers = Array(NUMBER_OF_ANSWERS).fill(mediumTimeAnswer);
+  const fastTimeAnswers = Array(NUMBER_OF_ANSWERS).fill(fastTimeAnswer);
+  const slowTimeAnswers = Array(NUMBER_OF_ANSWERS).fill(slowTimeAnswer);
 
-  it(`less then 10 questions`, () => {
-    const answer1 = new Answer(9000, false);
-    const answer2 = new Answer(10000, false);
-    assert.equal(pointsCounter([answer1, answer2], 10), -1);
+  it(`less then 10 correct answers`, () => {
+    const points = pointsCounter(failedAnswers, LIVES);
+    assert.equal(points, FAIL_POINT);
   });
   it(`points for all answers not fast not slow`, () => {
-    assert.equal(pointsCounter(generateAnswersArray(11000, true), 10), 1150);
+    const points = pointsCounter(mediumTimeAnswers, LIVES);
+    assert.equal(points, MEDIUM_TIME_POINT);
   });
-  it(`points for fast succsess answers`, () => {
-    assert.equal(pointsCounter(generateAnswersArray(9000, true), 10), generateAnswersArray(9000, true).length * 150 + 10 * 50);
+  it(`points for fast correct answers`, () => {
+    const points = pointsCounter(fastTimeAnswers, LIVES);
+    assert.equal(points, FAST_TIME_POINTS);
   });
-  it(`points for slow succsess answers`, () => {
-    assert.equal(pointsCounter(generateAnswersArray(25000, true), 10), generateAnswersArray(25000, true).length * 50 + 10 * 50);
+  it(`points for slow correct answers`, () => {
+    const points = pointsCounter(slowTimeAnswers, LIVES);
+    assert.equal(points, SLOW_TIME_POINTS);
+  });
+  it(`points > 0`, () => {
+    const points = pointsCounter(slowTimeAnswers, LIVES);
+    assert.equal(points > 0, true);
+  });
+  it(`incorrect live input`, () => {
+    const points = pointsCounter(slowTimeAnswers, `someString`);
+    assert.equal(isNaN(points), true);
   });
 });
 
-describe(`timer`, () => {
-
+describe(`Timer`, () => {
+  const START_TIME = 10;
+  const ZERO_TIME = 0;
   it(`correct time`, () => {
-    const timer = new Timer(10);
-    assert.equal(timer.time, 10);
-    assert.equal(timer.tick().time, 9);
-    assert.equal(timer.tick().tick().time, 7);
+    const timer = new Timer(START_TIME);
+    assert.equal(timer.time, START_TIME);
+    assert.equal(timer.tick().time, START_TIME - 1);
+    assert.equal(timer.tick().tick().time, START_TIME - 3);
   });
   it(`timer is over`, () => {
-    const timer = new Timer(0);
+    const timer = new Timer(ZERO_TIME);
     assert.equal(timer.tick(), `timer is over`);
   });
 
