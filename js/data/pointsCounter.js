@@ -1,4 +1,4 @@
-export const LIVES = 10;
+export const LIVES = 3;
 export const FAIL_POINT = -1;
 export const MEDIUM_TIME_POINT = 1150;
 export const CORRECT_POINT = 100;
