@@ -12,8 +12,9 @@ export const checkAnswersgameOne = (firstOptionValue, secondOptionValue, state) 
       correct: false,
       time: AVERAGE_TIME
     });
-
-    state.looseLife();
+    if (state.lives > 0) {
+      state.looseLife();
+    }
   }
 };
 
@@ -29,7 +30,9 @@ export const checkAnswersgameTwo = (value, state) => {
       time: AVERAGE_TIME
     });
 
-    state.looseLife();
+    if (state.lives > 0) {
+      state.looseLife();
+    }
   }
 };
 
@@ -45,6 +48,8 @@ export const checkAnswersgameThree = (src, state) => {
       time: AVERAGE_TIME
     });
 
-    state.looseLife();
+    if (state.lives > 0) {
+      state.looseLife();
+    }
   }
 };
