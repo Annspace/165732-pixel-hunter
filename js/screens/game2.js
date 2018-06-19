@@ -5,7 +5,7 @@ import {greeting} from './greeting';
 import {header} from '../parts/header';
 import footer from '../parts/footer';
 import {stats} from "../parts/stats";
-import {checkAnswersgameTwo} from "../logic/checkAnswers";
+import {checkAnswersGameTwo} from "../logic/checkAnswers";
 import {gameThree} from "./game3";
 
 export const gameTwo = (gameData) => {
@@ -13,7 +13,7 @@ export const gameTwo = (gameData) => {
     <p class="game__task"></p>
      <form class="game__content  game__content--wide">
       <div class="game__option">
-        <img src= ${gameData[state.screenIndex].question.src} alt="Option 1" width="705" height="455">
+        <img src= ${gameData.gameTwo[state.screenIndex].question.src} alt="Option 1" width="705" height="455">
         <label class="game__answer  game__answer--photo">
           <input name="question1" type="radio" value="photo">
           <span>Фото</span>
@@ -39,13 +39,12 @@ export const gameTwo = (gameData) => {
   for (let answer of gameAnswers) {
     answer.addEventListener(`change`, () => {
       const checkedAnswer = game2.querySelector(`input[name="question1"]:checked`).value;
-      checkAnswersgameTwo(checkedAnswer, state);
+      checkAnswersGameTwo(checkedAnswer, state);
       state.screenIndex++;
-      if (state.screenIndex < 6) {
+      if (state.screenIndex < gameData.gameTwo.length) {
         changeScreen(gameTwo(gameData));
       } else {
-        state.result.gameTwo.answers = state.answers.slice(3, 6 + 1);
-        state.result.gameTwo.lives = state.lives;
+        state.screenIndex = 0;
         changeScreen(gameThree(gameData));
       }
     });

@@ -1,5 +1,3 @@
-let gameData = [];
-
 const data = {
   paintings: [
     // People
@@ -23,8 +21,8 @@ const data = {
   ]
 };
 
-const gameOne = {
-  questionsScreenOne: {
+const gameData = {
+  gameOne: [{
     optionOne: {
       src: data.paintings[0],
       correctAnswer: `paint`
@@ -33,8 +31,7 @@ const gameOne = {
       src: data.photos[0],
       correctAnswer: `photo`
     }
-  },
-  questionsScreenTwo: {
+  }, {
     optionOne: {
       src: data.paintings[1],
       correctAnswer: `paint`
@@ -43,8 +40,7 @@ const gameOne = {
       src: data.photos[1],
       correctAnswer: `photo`
     }
-  },
-  questionsScreenThree: {
+  }, {
     optionOne: {
       src: data.paintings[2],
       correctAnswer: `paint`
@@ -53,76 +49,53 @@ const gameOne = {
       src: data.photos[2],
       correctAnswer: `photo`
     }
-  }
-};
-
-const gameTwo = {
-  questionsScreenOne: {
+  }],
+  gameTwo: [{
     question: {
       src: data.paintings[0],
       correctAnswer: `paint`
-    }
-  },
-  questionsScreenTwo: {
+    }},
+  {
     question: {
       src: data.photos[1],
       correctAnswer: `photo`
     }
   },
-  questionsScreenThree: {
+  {
     question: {
       src: data.paintings[2],
       correctAnswer: `paint`
     }
-  }
-};
-
-const gameThree = {
-  questionsScreenOne: {
+  }],
+  gameThree: [{
     question: {
       src1: data.photos[0],
       src2: data.paintings[0],
       src3: data.photos[1],
       correctAnswer: data.paintings[0]
     }
-  },
-  questionsScreenTwo: {
+  }, {
     question: {
       src1: data.paintings[1],
       src2: data.photos[1],
       src3: data.photos[2],
       correctAnswer: data.paintings[1]
     }
-  },
-  questionsScreenThree: {
+  }, {
     question: {
       src1: data.paintings[2],
       src2: data.photos[0],
       src3: data.photos[2],
       correctAnswer: data.paintings[2]
     }
-  },
-  questionsScreenFour: {
+  }, {
     question: {
       src1: data.photos[1],
       src2: data.photos[0],
       src3: data.paintings[2],
       correctAnswer: data.paintings[2]
     }
-  },
+  }]
 };
-
-for (let prop in gameOne) {
-  gameData.push(gameOne[prop]);
-}
-for (let prop in gameTwo) {
-  gameData.push(gameTwo[prop]);
-}
-for (let prop in gameThree) {
-  gameData.push(gameThree[prop]);
-}
-// gameData.push(gameOne.questionsScreenOne, gameOne.questionsScreenTwo, gameOne.questionsScreenThree,
-//    gameTwo.questionsScreenOne, gameTwo.questionsScreenTwo, gameTwo.questionsScreenThree,
-//    gameThree.questionsScreenOne, gameThree.questionsScreenTwo, gameThree.questionsScreenThree);
 
 export default gameData;

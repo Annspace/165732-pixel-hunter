@@ -3,7 +3,7 @@
 import {render, changeScreen} from '../logic/utils';
 import {greeting} from './greeting';
 import state from "../game-data/data";
-import {result} from '../parts/stats';
+import {renderResult} from '../parts/stats';
 import footer from "../parts/footer";
 
 export const statistics = () => {
@@ -17,22 +17,13 @@ export const statistics = () => {
   </header>
   <div class="result">
     <table class="result__table">
-      <tr>
-        <td class="result__number">1.</td>
-        ${result(state.result.gameOne.answers, state.result.gameOne.lives)}
-      </tr>
+        ${renderResult(state.result.gameOne, state.lives, 1)}
     </table>
-        <table class="result__table">
-      <tr>
-        <td class="result__number">2.</td>
-        ${result(state.result.gameTwo.answers, state.result.gameTwo.lives)}
-      </tr>
+    <table class="result__table">
+        ${renderResult(state.result.gameTwo, state.lives, 2)}
     </table>
-        <table class="result__table">
-      <tr>
-        <td class="result__number">3.</td>
-        ${result(state.result.gameThree.answers, state.result.gameThree.lives)}
-      </tr>
+    <table class="result__table">
+        ${renderResult(state.result.gameThree, state.lives, 3)}
     </table>
   </div>`;
 
@@ -40,7 +31,10 @@ export const statistics = () => {
   state.resetParams();
   const statScreen = render(article);
   const backButton = statScreen.querySelector(`button.back`);
-  backButton.addEventListener(`click`, () => changeScreen(greeting()));
+  backButton.addEventListener(`click`, () => {
+    state.resetParams();
+    changeScreen(greeting());
+  });
 
   return statScreen;
 };

@@ -1,6 +1,6 @@
 import {assert} from 'chai';
-import {CORRECT_POINT, pointsCounter} from './pointsCounter';
-import {FAST_CORRECT_POINT, SLOW_CORRECT_POINT, LIVES, LIVE_POINT, FAIL_POINT, MEDIUM_TIME_POINT} from './pointsCounter';
+import {CORRECT_POINT, pointsCounter} from '../logic/pointsCounter';
+import {FAST_CORRECT_POINT, SLOW_CORRECT_POINT, LIVES, LIVE_POINT, FAIL_POINT, MEDIUM_TIME_POINT} from '../logic/pointsCounter';
 import {Timer} from './timer';
 
 describe(`Check points`, () => {

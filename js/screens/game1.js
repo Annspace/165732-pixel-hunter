@@ -5,13 +5,13 @@ import {header} from "../parts/header";
 import footer from "../parts/footer";
 import state from '../game-data/data';
 import {stats} from '../parts/stats';
-import {checkAnswersgameOne} from "../logic/checkAnswers";
+import {checkAnswersGameOne} from "../logic/checkAnswers";
 import {gameTwo} from "./game2";
 
 export const gameOne = (gameData) => {
   const content = `<form class="game__content">
   <div class="game__option">
-        <img src= "${gameData[state.screenIndex].optionOne.src}" alt="Option 1" width="468" height="458">
+        <img src= "${gameData.gameOne[state.screenIndex].optionOne.src}" alt="Option 1" width="468" height="458">
         <label class="game__answer game__answer--photo">
           <input name="question1" type="radio" value="photo">
           <span>Фото</span>
@@ -22,7 +22,7 @@ export const gameOne = (gameData) => {
         </label>
       </div>
       <div class="game__option">
-        <img src="${gameData[state.screenIndex].optionTwo.src}" alt="Option 2" width="468" height="458">
+        <img src="${gameData.gameOne[state.screenIndex].optionTwo.src}" alt="Option 2" width="468" height="458">
         <label class="game__answer  game__answer--photo">
           <input name="question2" type="radio" value="photo">
           <span>Фото</span>
@@ -63,15 +63,14 @@ export const gameOne = (gameData) => {
     if (question1 && question2) {
       const answer1 = game1.querySelector(`input[name="question1"]:checked`).value;
       const answer2 = game1.querySelector(`input[name="question2"]:checked`).value;
-      checkAnswersgameOne(answer1, answer2, state);
+      checkAnswersGameOne(answer1, answer2, state);
       // индекс увеличивается, для того чтобы показать другие экраны
-      // вызывает сама себя, но с другими входными данными
+      // вызывает сама себя, но с другими вопросами
       state.screenIndex++;
-      if (state.screenIndex < 3) {
+      if (state.screenIndex < gameData.gameOne.length) {
         changeScreen(gameOne(gameData));
       } else {
-        state.result.gameOne.answers = state.answers.slice(0, 3 + 1);
-        state.result.gameOne.lives = state.lives;
+        state.screenIndex = 0;
         changeScreen(gameTwo(gameData));
       }
     }
