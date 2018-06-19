@@ -5,7 +5,6 @@ import {greeting} from './greeting';
 import footer from '../parts/footer';
 import {gameOne} from "./game1";
 import gameData from "../game-data/correctAnswers";
-import state from '../game-data/data';
 
 export const rules = () => {
   const content = `<header class="header">
