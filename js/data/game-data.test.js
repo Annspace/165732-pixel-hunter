@@ -1,6 +1,6 @@
 import {assert} from 'chai';
-import {CORRECT_POINT, pointsCounter} from './pointsCounter';
-import {FAST_CORRECT_POINT, SLOW_CORRECT_POINT, LIVES, LIVE_POINT, FAIL_POINT, MEDIUM_TIME_POINT} from './pointsCounter';
+import {CORRECT_POINT, pointsCounter} from '../logic/pointsCounter';
+import {FAST_CORRECT_POINT, SLOW_CORRECT_POINT, LIVES, LIVE_POINT, FAIL_POINT, MEDIUM_TIME_POINT} from '../logic/pointsCounter';
 import {Timer} from './timer';
 
 describe(`Check points`, () => {
@@ -9,19 +9,19 @@ describe(`Check points`, () => {
   const SLOW_TIME_POINTS = NUMBER_OF_ANSWERS * (CORRECT_POINT - SLOW_CORRECT_POINT) + LIVES * LIVE_POINT;
   const wrongAnswer = {
     correct: false,
-    time: 22000,
+    time: 22,
   };
   const mediumTimeAnswer = {
     correct: true,
-    time: 11000,
+    time: 11,
   };
   const fastTimeAnswer = {
     correct: true,
-    time: 9000,
+    time: 9,
   };
   const slowTimeAnswer = {
     correct: true,
-    time: 25000,
+    time: 25,
   };
   const failedAnswers = Array(NUMBER_OF_ANSWERS).fill(wrongAnswer);
   const mediumTimeAnswers = Array(NUMBER_OF_ANSWERS).fill(mediumTimeAnswer);
