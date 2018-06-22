@@ -1,8 +1,5 @@
 // main.js
-
-import {changeScreen} from "./logic/utils";
-import {greeting} from "./screens/greeting";
+import {greetingScreen} from './screens/greetingScreen';
 
 const introButton = document.querySelector(`.intro__asterisk`);
-
-introButton.addEventListener(`click`, () => changeScreen(greeting()));
+introButton.addEventListener(`click`, () => greetingScreen());
