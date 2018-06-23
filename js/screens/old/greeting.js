@@ -1,8 +1,8 @@
 // greeting.js
 
-import {render, changeScreen} from '../logic/utils';
+import {render, changeScreen} from '../../logic/utils';
 import {rules} from "./rules";
-import footer from "../parts/footer";
+import footer from "../../parts/footer";
 
 export const greeting = () => {
   const content = `<div class="greeting central--blur">

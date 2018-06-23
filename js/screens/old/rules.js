@@ -1,10 +1,10 @@
 // rules.js
 
-import {render, changeScreen} from '../logic/utils';
+import {render, changeScreen} from '../../logic/utils';
 import {greeting} from './greeting';
-import footer from '../parts/footer';
+import footer from '../../parts/footer';
 import {gameOne} from "./game1";
-import gameData from "../game-data/correctAnswers";
+import gameData from "../../game-data/correctAnswers";
 
 export const rules = () => {
   const content = `<header class="header">

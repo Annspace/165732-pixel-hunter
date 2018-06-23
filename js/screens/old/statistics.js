@@ -1,10 +1,10 @@
-// statistics.js
+// statistics-view.js
 
-import {render, changeScreen} from '../logic/utils';
+import {render, changeScreen} from '../../logic/utils';
 import {greeting} from './greeting';
-import state from "../game-data/data";
-import {renderResult} from '../parts/stats';
-import footer from "../parts/footer";
+import state from "../../game-data/data";
+import {renderResult} from '../../parts/stats';
+import footer from "../../parts/footer";
 
 export const statistics = () => {
   const content = `<header class="header">

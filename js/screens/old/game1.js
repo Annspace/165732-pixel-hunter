@@ -1,11 +1,11 @@
 // game1.js
-import {render, changeScreen} from '../logic/utils';
+import {render, changeScreen} from '../../logic/utils';
 import {greeting} from './greeting';
-import {header} from "../parts/header";
-import footer from "../parts/footer";
-import state from '../game-data/data';
-import {stats} from '../parts/stats';
-import {checkAnswersGameOne} from "../logic/checkAnswers";
+import {header} from "../../parts/header";
+import footer from "../../parts/footer";
+import state from '../../game-data/data';
+import {stats} from '../../parts/stats';
+import {checkAnswersGameOne} from "../../logic/checkAnswers";
 import {gameTwo} from "./game2";
 
 export const gameOne = (gameData) => {
