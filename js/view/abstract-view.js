@@ -38,13 +38,7 @@ export default class AbstractView {
     return render(this.template);
   }
 
-  bind() {
-    // const backButton = this.element.querySelector(`button.back`);
-    // backButton.addEventListener(`click`, () => this.onClickBackButton());
-  }
+  bind() {}
 
-  // onClickBackButton() {
-
-  // }
 }
 

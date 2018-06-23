@@ -1,4 +1,4 @@
-// statistics.js
+// statistics-view.js
 
 import {render, changeScreen} from '../../logic/utils';
 import {greeting} from './greeting';

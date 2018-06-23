@@ -1,48 +1,29 @@
 import AbstractView from "./abstract-view";
+import {header} from "../parts/header";
+import {stats} from "../parts/stats";
 
 export default class GameThreeView extends AbstractView {
-
+  constructor(state, questions) {
+    super();
+    this.state = state;
+    this.questions = questions;
+  }
   get template() {
-    return `<header class="header">
-    <div class="header__back">
-      <button class="back">
-        <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
-        <img src="img/logo_small.svg" width="101" height="44">
-      </button>
-    </div>
-    <h1 class="game__timer">NN</h1>
-    <div class="game__lives">
-      <img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">
-      <img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">
-      <img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">
-    </div>
-  </header>
-  <div class="game">
+    return `${header(this.state)}<div class="game">
     <p class="game__task">Найдите рисунок среди изображений</p>
     <form class="game__content  game__content--triple">
       <div class="game__option">
-        <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
+        <img src="${this.questions.gameThree[this.state.screenIndex].question.src1}" alt="Option 1" width="304" height="455">
       </div>
       <div class="game__option  game__option--selected">
-        <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
+        <img src="${this.questions.gameThree[this.state.screenIndex].question.src2}" alt="Option 1" width="304" height="455">
       </div>
       <div class="game__option">
-        <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
+        <img src="${this.questions.gameThree[this.state.screenIndex].question.src3}" alt="Option 1" width="304" height="455">
       </div>
     </form>
     <div class="stats">
-      <ul class="stats">
-        <li class="stats__result stats__result--wrong"></li>
-        <li class="stats__result stats__result--slow"></li>
-        <li class="stats__result stats__result--fast"></li>
-        <li class="stats__result stats__result--correct"></li>
-        <li class="stats__result stats__result--wrong"></li>
-        <li class="stats__result stats__result--unknown"></li>
-        <li class="stats__result stats__result--slow"></li>
-        <li class="stats__result stats__result--unknown"></li>
-        <li class="stats__result stats__result--fast"></li>
-        <li class="stats__result stats__result--unknown"></li>
-      </ul>
+       ${stats(this.state.answers)}
     </div>
   </div>`;
   }
@@ -50,8 +31,13 @@ export default class GameThreeView extends AbstractView {
   bind() {
     const backButton = this.element.querySelector(`button.back`);
     backButton.addEventListener(`click`, () => this.onClickBackButton());
+    const gameOptions = this.element.querySelectorAll(`.game__option`);
+    for (let option of gameOptions) {
+      option.addEventListener(`click`, (e) => this.onClickOption(e.target));
+    }
   }
 
   onClickBackButton() {}
-
+  onClickOption() {}
+  checkAnswers() {}
 }
