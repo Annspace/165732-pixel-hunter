@@ -1,5 +1,5 @@
 import {changeScreen} from '../logic/utils';
-import StatisticsView from "../view/statistics-view";
+import StatisticsView from "../view/view-old/statistics-view";
 import {greetingScreen} from "./greetingScreen";
 import state from "../game-data/data";
 import gameData from "../game-data/correctAnswers";

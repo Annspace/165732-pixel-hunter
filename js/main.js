@@ -1,5 +1,4 @@
-// main.js
-import {greetingScreen} from './screens/greetingScreen';
+import Application from './application';
+import data from "./game-data/data";
 
-const introButton = document.querySelector(`.intro__asterisk`);
-introButton.addEventListener(`click`, () => greetingScreen());
+Application.showGreeting();

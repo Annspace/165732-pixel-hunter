@@ -1,4 +1,4 @@
-import GameOneView from '../view/game_one-view';
+import GameOneView from '../view/view-old/game_one-view';
 import {changeScreen} from '../logic/utils';
 import {greetingScreen} from './greetingScreen';
 import {gameTwoScreen} from './gameTwoScreen';

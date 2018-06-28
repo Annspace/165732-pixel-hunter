@@ -1,6 +1,6 @@
 import {greetingScreen} from "./greetingScreen";
 import {changeScreen} from '../logic/utils';
-import GameThreeView from "../view/game_three-view";
+import GameThreeView from "../view/view-old/game_three-view";
 import {statisticsScreen} from "./statisticsScreen";
 import state from "../game-data/data";
 import gameData from "../game-data/correctAnswers";

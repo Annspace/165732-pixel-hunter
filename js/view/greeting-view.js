@@ -1,4 +1,5 @@
 import AbstractView from "./abstract-view";
+const ENTER_KEY_CODE = 13;
 
 export default class GreetingView extends AbstractView {
 
@@ -21,6 +22,12 @@ export default class GreetingView extends AbstractView {
   bind() {
     const greetingContinue = this.element.querySelector(`.greeting__continue`);
     greetingContinue.addEventListener(`click`, () => this.onClickContinue());
+
+    greetingContinue.addEventListener(`keydown`, (e) => {
+      if (e.keyCode === ENTER_KEY_CODE) {
+        this.onClickContinue();
+      }
+    });
   }
 
   onClickContinue() {
