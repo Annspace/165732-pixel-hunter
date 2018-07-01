@@ -2,6 +2,7 @@ import FooterView from '../view/footer-view';
 import HeaderView from '../view/header-view';
 import GameView from '../view/game-view';
 import Application from '../application';
+import ModalView from "../view/modal-view";
 
 // управляет игровым экраном
 class GameScreen {
@@ -12,43 +13,50 @@ class GameScreen {
     this.header = new HeaderView(this.model.state);
     this.content = new GameView(this.model);
     this.footer = new FooterView();
+    this.modal = new ModalView();
     this.timer = null;
+    this.startTimer();
 
     this.root = document.createElement(`div`);
     this.root.appendChild(this.header.element);
     this.root.appendChild(this.content.element);
     this.root.appendChild(this.footer.element);
 
-    // игра прерывается если нет жизней
-
     // для первой игры
     this.content.onChangeForm = (checkedElements) => {
-      this.stopTimer();
       if (checkedElements.length === 2) {
-        this.checkAnswersGameOne(checkedElements[0].value, checkedElements[1].value);
+        this.stopTimer();
+        if (this.model.getTime > 30) {
+          this.model.pushWrongAnswer();
+        } else {
+          this.checkAnswersGameOne(checkedElements[0].value, checkedElements[1].value);
+          this.model.resetTime();
+        }
         this.changeGameScreen();
       }
-    };
-    this.header.onClickBackButton = () => {
-      // this.model.reset();
-      Application.showGreeting();
     };
 
     // для второй игры
     this.content.onChange = (element) => {
+      this.stopTimer();
+      this.model.resetTime();
       this.checkAnswersGameTwo(element.value);
+      this.model.resetTime();
       this.changeGameScreen();
     };
 
+
     // для третьей игры
     this.content.onClickOption = (element) => {
+      this.stopTimer();
+      this.model.resetTime();
       let answerSrc = element.src;
       this.checkAnswersGameThree(answerSrc);
+      this.model.resetTime();
       this.changeGameScreen();
     };
 
   }
-
 
   stopTimer() {
     clearInterval(this.timer);
@@ -61,22 +69,26 @@ class GameScreen {
     }, 1000);
   }
 
-
-  startGame() {
-    // Старт игры
-    this.model.start();
-    this.startTimer();
-  }
-
   get element() {
     return this.root;
   }
-
 
   updateHeader() {
     let newHeader = new HeaderView(this.model.state);
     this.root.replaceChild(newHeader.element, this.header.element);
     this.header = newHeader;
+    this.header.onClickBackButton = () => {
+      this.stopTimer();
+      this.root.appendChild(this.modal.element);
+      this.modal.onClickConfirm = () => {
+        this.model.resetGame();
+        Application.showGreeting();
+      };
+      this.modal.onClickCancel = () => {
+        this.root.removeChild(this.modal.element);
+        this.startTimer();
+      };
+    };
   }
 
 
@@ -124,8 +136,9 @@ class GameScreen {
   // переключение экранов
   changeGameScreen() {
     this.model.changeScreenIndex();
-    if (this.model.endOfGames()) {
+    if (this.model.endOfGames() || this.model.isDead()) {
       Application.showStatistics(this.model.getResults, this.model.getLives);
+      this.model.resetGame();
     } else {
       if (this.model.endOfCurrentGame()) {
         this.model.resetScreenIndex();

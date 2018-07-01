@@ -1,4 +1,4 @@
-export const INITIAL_GAME = {
+export const INITIAL_GAME = Object.freeze({
   screenIndex: 0,
   lives: 3,
   time: 0,
@@ -9,4 +9,4 @@ export const INITIAL_GAME = {
     1: [],
     2: []
   }
-};
+});

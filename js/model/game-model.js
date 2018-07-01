@@ -4,6 +4,8 @@ import {
 
 import data from "../game-data/data";
 
+let gameCopy = Object.assign({}, INITIAL_GAME);
+
 // управляет состоянием
 class GameModel {
   constructor(playerName) {
@@ -16,23 +18,26 @@ class GameModel {
     return this._state;
   }
 
+  get getTime() {
+    return this._state.time;
+  }
+
   pushCorrectAnswer() {
     this.state.result[this.getCurrentGame].push({
       correct: true,
-      time: 15
+      time: this.getTime
     });
   }
 
   pushWrongAnswer() {
     this.state.result[this.getCurrentGame].push({
       correct: false,
-      time: 15
+      time: this.getTime
     });
     this.die();
   }
 
   pushAllAnswers() {
-    // перебрать элементы массива this.state.result[this.getCurrentGame] и добавить в итоговый
     this.state.result[this.getCurrentGame].forEach((it) => {
       this.state.answers.push(it);
     });
@@ -56,22 +61,35 @@ class GameModel {
   }
 
   die() {
-    if (this._state.lives > 0) {
-      this._state.lives--;
-    }
+    this._state.lives--;
   }
 
   start() {
-    this._state = INITIAL_GAME;
+    this._state = gameCopy;
+  }
+
+  // нажатие на кнопку назад
+  resetGame() {
+    gameCopy = Object.assign({}, INITIAL_GAME);
+    gameCopy.result = {
+      0: [],
+      1: [],
+      2: []
+    };
+    gameCopy.answers = [];
   }
 
   isDead() {
-    return this._state.lives <= 0;
+    return this._state.lives < 0;
   }
 
   // Timer
   tick() {
     this._state.time++;
+  }
+
+  resetTime() {
+    this._state.time = 0;
   }
 
 
