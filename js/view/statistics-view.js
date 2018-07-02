@@ -1,12 +1,12 @@
 import AbstractView from "./abstract-view";
 import {renderResult} from '../parts/stats';
 
-export default class GameThreeView extends AbstractView {
+export default class StatisticsView extends AbstractView {
 
-  constructor(state, questions) {
+  constructor(result, lives) {
     super();
-    this.state = state;
-    this.questions = questions;
+    this.result = result;
+    this.lives = lives;
   }
 
   get template() {
@@ -19,15 +19,13 @@ export default class GameThreeView extends AbstractView {
     </div>
   </header>
   <div class="result">
-    <table class="result__table">
-        ${renderResult(this.state.result.gameOne, this.state.lives, 1)}
-    </table>
-    <table class="result__table">
-        ${renderResult(this.state.result.gameTwo, this.state.lives, 2)}
-    </table>
-    <table class="result__table">
-        ${renderResult(this.state.result.gameThree, this.state.lives, 3)}
-    </table>
+  
+  ${new Array(3).fill(``).map((it, i) => {
+    return `<table class="result__table">
+        ${renderResult(this.result[i], this.lives, i + 1)}
+    </table>`;
+  }).join(``)}
+  
   </div>`;
   }
 

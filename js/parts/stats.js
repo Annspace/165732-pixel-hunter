@@ -22,7 +22,6 @@ const fillAnswers = (answers) => {
 
 const renderStat = (answersArray) => {
   const answersCopy = answersArray.slice();
-
   return answersCopy.map((answer) => {
     if (answer.correct && answer.time < FAST_TIME) {
       return `<li class="stats__result stats__result--fast"></li>`;

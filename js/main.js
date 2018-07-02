@@ -1,5 +1,3 @@
-// main.js
-import {greetingScreen} from './screens/greetingScreen';
+import Application from './application';
 
-const introButton = document.querySelector(`.intro__asterisk`);
-introButton.addEventListener(`click`, () => greetingScreen());
+Application.showWelcome();
