@@ -2,13 +2,11 @@ import {
   INITIAL_GAME
 } from '../game-data/dataGame';
 
-import data from "../game-data/data";
-
 let gameCopy = Object.assign({}, INITIAL_GAME);
 
 // управляет состоянием
 class GameModel {
-  constructor(playerName) {
+  constructor(data, playerName) {
     this.data = data;
     this.playerName = playerName;
     this.start();
