@@ -77,6 +77,9 @@ class GameScreen {
     let newHeader = new HeaderView(this.model.state);
     this.root.replaceChild(newHeader.element, this.header.element);
     this.header = newHeader;
+    if (this.model.getTime > 25) {
+      this.header.addBorder();
+    }
     this.header.onClickBackButton = () => {
       this.stopTimer();
       this.root.appendChild(this.modal.element);
