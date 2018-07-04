@@ -112,6 +112,10 @@ class GameModel {
   get getLives() {
     return this._state.lives;
   }
+
+  image(index) {
+    return this.data[this.getCurrentGame][this.getCurrentScreenIndex].answers[index].image;
+  }
 }
 
 export default GameModel;

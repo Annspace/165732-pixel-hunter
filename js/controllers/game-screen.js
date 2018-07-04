@@ -3,6 +3,7 @@ import HeaderView from '../view/header-view';
 import GameView from '../view/game-view';
 import Application from '../application';
 import ModalView from "../view/modal-view";
+import {resize} from "../logic/resizeImages";
 
 const ONE_SECOND = 1000;
 const LAST_SECONDS = 25;
@@ -33,6 +34,11 @@ class GameScreen {
         this.checkAnswersGameOne(checkedElements[0].value, checkedElements[1].value);
         this.changeGameScreen();
       }
+    };
+    // для всех игр
+    this.content.changeImgSize = (img, frame) => {
+      img.width = resize(frame, {width: img.naturalWidth, height: img.naturalHeight}).width;
+      img.height = resize(frame, {width: img.naturalWidth, height: img.naturalHeight}).height;
     };
 
     // для второй игры
