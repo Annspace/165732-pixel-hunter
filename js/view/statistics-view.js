@@ -19,7 +19,7 @@ export default class StatisticsView extends AbstractView {
     </div>
   </header>
   <div class="result">
-  
+  ${this.insertVictory(this.lives)}
   ${new Array(3).fill(``).map((it, i) => {
     return `<table class="result__table">
         ${renderResult(this.result[i], this.lives, i + 1)}
@@ -33,5 +33,14 @@ export default class StatisticsView extends AbstractView {
     const backButton = this.element.querySelector(`button.back`);
     backButton.addEventListener(`click`, () => this.onClickBackButton());
   }
+
+  insertVictory(lives) {
+    if (lives >= 0) {
+      return `<h1>Победа!</h1>`;
+    } else {
+      return ``;
+    }
+  }
+
   onClickBackButton() {}
 }

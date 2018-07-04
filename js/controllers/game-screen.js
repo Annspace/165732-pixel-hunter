@@ -4,6 +4,10 @@ import GameView from '../view/game-view';
 import Application from '../application';
 import ModalView from "../view/modal-view";
 
+const ONE_SECOND = 1000;
+const LAST_SECONDS = 25;
+const ANSWER_MAX_TIME = 30;
+
 // управляет игровым экраном
 class GameScreen {
   constructor(model) {
@@ -26,12 +30,7 @@ class GameScreen {
     this.content.onChangeForm = (checkedElements) => {
       if (checkedElements.length === 2) {
         this.stopTimer();
-        if (this.model.getTime > 30) {
-          this.model.pushWrongAnswer();
-        } else {
-          this.checkAnswersGameOne(checkedElements[0].value, checkedElements[1].value);
-          this.model.resetTime();
-        }
+        this.checkAnswersGameOne(checkedElements[0].value, checkedElements[1].value);
         this.changeGameScreen();
       }
     };
@@ -39,9 +38,7 @@ class GameScreen {
     // для второй игры
     this.content.onChange = (element) => {
       this.stopTimer();
-      this.model.resetTime();
       this.checkAnswersGameTwo(element.value);
-      this.model.resetTime();
       this.changeGameScreen();
     };
 
@@ -49,10 +46,8 @@ class GameScreen {
     // для третьей игры
     this.content.onClickOption = (element) => {
       this.stopTimer();
-      this.model.resetTime();
       let answerSrc = element.src;
       this.checkAnswersGameThree(answerSrc);
-      this.model.resetTime();
       this.changeGameScreen();
     };
 
@@ -66,7 +61,7 @@ class GameScreen {
     this.timer = setInterval(() => {
       this.model.tick();
       this.updateHeader();
-    }, 1000);
+    }, ONE_SECOND);
   }
 
   get element() {
@@ -77,8 +72,14 @@ class GameScreen {
     let newHeader = new HeaderView(this.model.state);
     this.root.replaceChild(newHeader.element, this.header.element);
     this.header = newHeader;
-    if (this.model.getTime > 25) {
-      this.header.addBorder();
+    if (this.model.getTime >= LAST_SECONDS) {
+      this.header.startFlashing();
+    }
+    if (this.model.getTime > ANSWER_MAX_TIME) {
+      this.stopTimer();
+      this.model.pushWrongAnswer();
+      this.model.pushAllAnswers();
+      this.changeGameScreen();
     }
     this.header.onClickBackButton = () => {
       this.stopTimer();
@@ -138,6 +139,7 @@ class GameScreen {
 
   // переключение экранов
   changeGameScreen() {
+    this.model.resetTime();
     this.model.changeScreenIndex();
     if (this.model.endOfGames() || this.model.isDead()) {
       Application.showStatistics(this.model.getResults, this.model.getLives);

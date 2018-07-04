@@ -35,14 +35,15 @@ export default class HeaderView extends AbstractView {
 
   onClickBackButton() {}
 
-  addBorder() {
+  startFlashing() {
     const time = this.element.querySelector(`.game__timer`);
-    let flag = false;
+    let flag = true;
     setInterval(() => {
       if (flag) {
-        time.style.border = `0px solid red`;
+        time.style.display = `none`;
+        flag = false;
       } else {
-        time.style.border = `5px solid red`;
+        time.style.display = `block`;
       }
     }, 100);
   }

@@ -61,6 +61,7 @@ const bonusSpeed = (answers) => {
       speedAnswers++;
     }
   });
+
   if (points === 0) {
     return ``;
   } else {
@@ -127,18 +128,6 @@ export const renderResult = (answers, lives, resultNumber) => {
         <td class="result__total">${pointsCounter(answers, lives)}</td>
         <td class="result__total  result__total--final">fail</td>
         </tr>`;
-  } else if (pointsCounter(answers, lives) === MEDIUM_TIME_POINT) {
-    return `<tr>
-        <td class="result__number">${resultNumber}</td>
-        <td colspan="2">
-          <ul class="stats">
-              ${renderStat(answersCopy)}
-          </ul>
-        </td>
-      </tr>
-       <tr>
-        <td colspan="5" class="result__total  result__total--final">${pointsCounter(answers, lives)}</td>
-      </tr>`;
   } else {
     return `<tr>
         <td class="result__number">${resultNumber}</td>

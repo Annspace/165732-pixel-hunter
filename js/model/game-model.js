@@ -20,6 +20,7 @@ class GameModel {
     return this._state.time;
   }
 
+  // для статистики каждой из игр
   pushCorrectAnswer() {
     this.state.result[this.getCurrentGame].push({
       correct: true,
@@ -27,6 +28,7 @@ class GameModel {
     });
   }
 
+  // для статистики каждой из игр
   pushWrongAnswer() {
     this.state.result[this.getCurrentGame].push({
       correct: false,
@@ -35,10 +37,9 @@ class GameModel {
     this.die();
   }
 
+  // для статистики под фото
   pushAllAnswers() {
-    this.state.result[this.getCurrentGame].forEach((it) => {
-      this.state.answers.push(it);
-    });
+    this.state.answers.push(this.state.result[this.getCurrentGame][this.getCurrentScreenIndex]);
   }
 
   get getResults() {
