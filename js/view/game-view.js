@@ -17,7 +17,7 @@ export default class GameView extends AbstractView {
       case 0:
         return `
   <div class="game">
-     <p class="game__task">${this.model.data[this.model.getCurrentGame][this.model.getCurrentScreenIndex].question}</p>
+     <p class="game__task">${this.model.getTask}</p>
      <form class="game__content">
   <div class="game__option">
         <img src= "${this.model.image(0).url}" alt="Option 1">
@@ -52,7 +52,7 @@ export default class GameView extends AbstractView {
       case 1:
         return `
        <div class="game">
-      <p class="game__task">${this.model.data[this.model.getCurrentGame][this.model.getCurrentScreenIndex].question}</p>
+      <p class="game__task">${this.model.getTask}</p>
      <form class="game__content  game__content--wide">
       <div class="game__option">
         <img src= ${this.model.image(0).url} alt="Option 1">
@@ -76,7 +76,7 @@ export default class GameView extends AbstractView {
       case 2:
         return `
     <div class="game">
-    <p class="game__task">${this.model.data[this.model.getCurrentGame][this.model.getCurrentScreenIndex].question}</p>
+    <p class="game__task">${this.model.getTask}</p>
     <form class="game__content  game__content--triple">
     ${new Array(3).fill(``).map((it, i) =>
     `<div class="game__option">
@@ -137,5 +137,4 @@ export default class GameView extends AbstractView {
   onChangeForm() {}
   onChange() {}
   changeImgSize() {}
-
 }
