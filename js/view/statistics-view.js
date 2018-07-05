@@ -1,5 +1,5 @@
 import AbstractView from "./abstract-view";
-import {renderResult} from '../parts/stats';
+import {renderResult} from '../results/stats';
 
 export default class StatisticsView extends AbstractView {
 

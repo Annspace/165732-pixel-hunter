@@ -1,20 +1,21 @@
 import {assert} from 'chai';
 import {CORRECT_POINT, pointsCounter} from '../logic/pointsCounter';
-import {FAST_CORRECT_POINT, SLOW_CORRECT_POINT, LIVES, LIVE_POINT, FAIL_POINT, MEDIUM_TIME_POINT} from '../logic/pointsCounter';
+import {FAST_CORRECT_POINT, SLOW_CORRECT_POINT, LIVES, LIVE_POINT, FAIL_POINT} from '../logic/pointsCounter';
 import {Timer} from './timer';
 
 describe(`Check points`, () => {
   const NUMBER_OF_ANSWERS = 10;
+  const NO_LIVES = -1;
   const FAST_TIME_POINTS = NUMBER_OF_ANSWERS * (CORRECT_POINT + FAST_CORRECT_POINT) + LIVES * LIVE_POINT;
   const SLOW_TIME_POINTS = NUMBER_OF_ANSWERS * (CORRECT_POINT - SLOW_CORRECT_POINT) + LIVES * LIVE_POINT;
   const wrongAnswer = {
     correct: false,
     time: 22,
   };
-  const mediumTimeAnswer = {
+  /* const mediumTimeAnswer = {
     correct: true,
     time: 11,
-  };
+  }; */
   const fastTimeAnswer = {
     correct: true,
     time: 9,
@@ -24,18 +25,18 @@ describe(`Check points`, () => {
     time: 25,
   };
   const failedAnswers = Array(NUMBER_OF_ANSWERS).fill(wrongAnswer);
-  const mediumTimeAnswers = Array(NUMBER_OF_ANSWERS).fill(mediumTimeAnswer);
+  // const mediumTimeAnswers = Array(NUMBER_OF_ANSWERS).fill(mediumTimeAnswer);
   const fastTimeAnswers = Array(NUMBER_OF_ANSWERS).fill(fastTimeAnswer);
   const slowTimeAnswers = Array(NUMBER_OF_ANSWERS).fill(slowTimeAnswer);
 
-  it(`less then 10 correct answers`, () => {
-    const points = pointsCounter(failedAnswers, LIVES);
+  it(`no lives`, () => {
+    const points = pointsCounter(failedAnswers, NO_LIVES);
     assert.equal(points, FAIL_POINT);
   });
-  it(`points for all answers not fast not slow`, () => {
+  /* it(`points for all answers not fast not slow`, () => {
     const points = pointsCounter(mediumTimeAnswers, LIVES);
     assert.equal(points, MEDIUM_TIME_POINT);
-  });
+  }); */
   it(`points for fast correct answers`, () => {
     const points = pointsCounter(fastTimeAnswers, LIVES);
     assert.equal(points, FAST_TIME_POINTS);

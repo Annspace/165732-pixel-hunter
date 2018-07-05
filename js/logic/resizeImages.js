@@ -1,12 +1,10 @@
 export const resize = (frame, image) => {
-  if (frame.width === image.width && frame.height === image.height) {
-    return {width: frame.width, height: frame.height};
-  }
-  if (image.width < image.height) {
-    return {width: Math.floor(frame.width / 2), height: frame.height};
-  }
-  if (image.width > image.height) {
-    return {width: frame.width, height: Math.floor(frame.height / 2)};
-  }
-  return new Error(`Can't get sizes`);
+  const widthScale = image.width / frame.width;
+  const heightScale = image.height / frame.height;
+  const scale = widthScale > heightScale ? widthScale : heightScale;
+
+  return {
+    width: Math.round(image.width / scale),
+    height: Math.round(image.height / scale)
+  };
 };

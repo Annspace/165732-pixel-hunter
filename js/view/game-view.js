@@ -1,5 +1,5 @@
 import AbstractView from './abstract-view';
-import {stats} from "../parts/stats";
+import {stats} from "../results/stats";
 
 const FRAME_ONE = {width: 468, height: 458};
 const FRAME_TWO = {width: 705, height: 455};

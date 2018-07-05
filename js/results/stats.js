@@ -1,5 +1,5 @@
 import {pointsCounter} from "../logic/pointsCounter";
-import {FAST_CORRECT_POINT, SLOW_CORRECT_POINT, CORRECT_POINT, LIVE_POINT, FAIL_POINT, MEDIUM_TIME_POINT} from '../logic/pointsCounter';
+import {FAST_CORRECT_POINT, SLOW_CORRECT_POINT, CORRECT_POINT, LIVE_POINT, FAIL_POINT} from '../logic/pointsCounter';
 const FAST_TIME = 10;
 const SLOW_TIME = 20;
 const ANSWERS_NUMBER = 10;
