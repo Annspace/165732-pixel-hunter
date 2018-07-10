@@ -101,8 +101,10 @@ export default class GameView extends AbstractView {
       const images = this.element.querySelectorAll(`img`);
       gameForm.addEventListener(`change`, () => this.onChangeForm(gameForm.querySelectorAll(`input:checked`)));
       for (let img of images) {
+        img.style.display = `none`;
         img.addEventListener(`load`, (e) => {
           this.changeImgSize(e.target, FRAME_ONE);
+          img.style.display = `block`;
         });
       }
     }
