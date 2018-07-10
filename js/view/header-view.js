@@ -1,5 +1,8 @@
 import AbstractView from "./abstract-view";
 
+const LAST_SECONDS = 25;
+const FLASHING_TIME = 100;
+
 export default class HeaderView extends AbstractView {
 
   constructor(state) {
@@ -35,16 +38,25 @@ export default class HeaderView extends AbstractView {
 
   onClickBackButton() {}
 
-  startFlashing() {
-    const time = this.element.querySelector(`.game__timer`);
+  startFlashing(element) {
     let flag = true;
     setInterval(() => {
       if (flag) {
-        time.style.display = `none`;
+        element.style.display = `none`;
         flag = false;
       } else {
-        time.style.display = `block`;
+        element.style.display = `block`;
+        flag = true;
       }
-    }, 100);
+    }, FLASHING_TIME);
   }
+
+  updateTimer() {
+    const time = this.element.querySelector(`.game__timer`);
+    time.innerHTML = this.state.time;
+    if (time.innerHTML >= LAST_SECONDS) {
+      this.startFlashing(time);
+    }
+  }
+
 }

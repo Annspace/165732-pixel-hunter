@@ -6,7 +6,7 @@ import ModalView from "../view/modal-view";
 import {resize} from "../logic/resizeImages";
 
 const ONE_SECOND = 1000;
-const LAST_SECONDS = 25;
+
 const ANSWER_MAX_TIME = 30;
 
 // управляет игровым экраном
@@ -66,7 +66,7 @@ class GameScreen {
   startTimer() {
     this.timer = setInterval(() => {
       this.model.tick();
-      this.updateHeader();
+      this.update();
     }, ONE_SECOND);
   }
 
@@ -74,13 +74,9 @@ class GameScreen {
     return this.root;
   }
 
-  updateHeader() {
-    let newHeader = new HeaderView(this.model.state);
-    this.root.replaceChild(newHeader.element, this.header.element);
-    this.header = newHeader;
-    if (this.model.getTime >= LAST_SECONDS) {
-      this.header.startFlashing();
-    }
+
+  update() {
+    this.header.updateTimer();
     if (this.model.getTime > ANSWER_MAX_TIME) {
       this.stopTimer();
       this.model.pushWrongAnswer();

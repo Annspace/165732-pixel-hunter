@@ -76,7 +76,7 @@ class GameModel {
   // нажатие на кнопку назад
   resetGame() {
     gameCopy = Object.assign({}, INITIAL_GAME);
-    resultCopy = {0: [], 1: [], 2: []};
+    resultCopy = Object.assign({}, result);
     answersCopy = answers.slice();
   }
 
