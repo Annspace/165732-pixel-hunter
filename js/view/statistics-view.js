@@ -3,36 +3,23 @@ import {renderResult} from '../results/stats';
 
 export default class StatisticsView extends AbstractView {
 
-  constructor(result, lives) {
+  constructor(answers, lives, index) {
     super();
-    this.result = result;
+    this.answers = answers;
     this.lives = lives;
+    this.index = index;
   }
 
   get template() {
-    return `<header class="header">
-    <div class="header__back">
-      <button class="back">
-        <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
-        <img src="img/logo_small.svg" width="101" height="44">
-      </button>
-    </div>
-  </header>
+    return `
   <div class="result">
   ${this.insertVictory(this.lives)}
-  ${new Array(3).fill(``).map((it, i) => {
-    return `<table class="result__table">
-        ${renderResult(this.result[i], this.lives, i + 1)}
-    </table>`;
-  }).join(``)}
-  
-  </div>`;
+   <table class="result__table">
+      ${renderResult(this.answers, this.lives, this.index)}
+      </table>
+      </div>`;
   }
 
-  bind() {
-    const backButton = this.element.querySelector(`button.back`);
-    backButton.addEventListener(`click`, () => this.onClickBackButton());
-  }
 
   insertVictory(lives) {
     if (lives >= 0) {

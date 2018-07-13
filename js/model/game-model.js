@@ -5,8 +5,6 @@ import {
 let gameCopy = Object.assign({}, INITIAL_GAME);
 let answers = [];
 let answersCopy = answers.slice();
-let result = Object.freeze({0: [], 1: [], 2: []});
-let resultCopy = Object.assign({}, result);
 
 // управляет состоянием
 class GameModel {
@@ -26,7 +24,7 @@ class GameModel {
 
   // для статистики каждой из игр
   pushCorrectAnswer() {
-    this.result[this.getCurrentGame].push({
+    this.answers.push({
       correct: true,
       time: this.getTime
     });
@@ -34,20 +32,11 @@ class GameModel {
 
   // для статистики каждой из игр
   pushWrongAnswer() {
-    this.result[this.getCurrentGame].push({
+    this.answers.push({
       correct: false,
       time: this.getTime
     });
     this.die();
-  }
-
-  // для статистики под фото
-  pushAllAnswers() {
-    this.answers.push(this.result[this.getCurrentGame][this.getCurrentScreenIndex]);
-  }
-
-  get getResults() {
-    return this.result;
   }
 
 
@@ -69,14 +58,12 @@ class GameModel {
 
   start() {
     this._state = gameCopy;
-    this.result = resultCopy;
     this.answers = answersCopy;
   }
 
   // нажатие на кнопку назад
   resetGame() {
     gameCopy = Object.assign({}, INITIAL_GAME);
-    resultCopy = Object.assign({}, result);
     answersCopy = answers.slice();
   }
 

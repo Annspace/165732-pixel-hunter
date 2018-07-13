@@ -115,8 +115,10 @@ export default class GameView extends AbstractView {
         answer.addEventListener(`change`, (e) => this.onChange(e.target));
       }
       for (let img of images) {
+        img.style.display = `none`;
         img.addEventListener(`load`, (e) => {
           this.changeImgSize(e.target, FRAME_TWO);
+          img.style.display = `block`;
         });
       }
 
@@ -128,8 +130,10 @@ export default class GameView extends AbstractView {
         option.addEventListener(`click`, (e) => this.onClickOption(e.target));
       }
       for (let img of images) {
+        img.style.display = `none`;
         img.addEventListener(`load`, (e) => {
           this.changeImgSize(e.target, FRAME_THREE);
+          img.style.display = `none`;
         });
       }
     }

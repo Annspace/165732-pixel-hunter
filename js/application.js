@@ -7,8 +7,7 @@ import StatisticsScreen from "./controllers/statistics-screen";
 import SplashScreen from "./controllers/splash-screen";
 import ErrorScreen from "./controllers/error-screen";
 import WelcomeView from "./view/welcome-view";
-import {checkStatus} from "./logic/utils";
-import {adaptServerData} from "./game-data/data-adapter";
+import Loader from "./controllers/loader";
 
 let dataGame;
 
@@ -18,11 +17,8 @@ export default class Application {
     const splash = new SplashScreen();
     changeScreen(splash.element);
     splash.start();
-    window.fetch(`https://es.dump.academy/pixel-hunter/questions`).
-    then(checkStatus).
-    then((response) => response.json()).
-    then((data) => {
-      dataGame = adaptServerData(data);
+    Loader.loadData().then((data) => {
+      dataGame = data;
     }).
     then(() => Application.showWelcome()).
     catch(Application.showError).
@@ -50,9 +46,18 @@ export default class Application {
     changeScreen(gameScreen.element);
   }
 
-  static showStatistics(result, lives) {
-    const statistics = new StatisticsScreen(result, lives);
-    changeScreen(statistics.element);
+  static showStatistics(model) {
+    const statistics = new StatisticsScreen();
+    let resultGame = {result: model.getAnswers, lives: model.getLives};
+    Loader.saveResults(resultGame, model.playerName).
+    then(() => Loader.loadResults(model.playerName)).
+    then((data) => {
+      data.forEach((it, index) => {
+        statistics.addHistory(it.result, it.lives, index + 1);
+      });
+      changeScreen(statistics.element);
+    }).
+    catch(Application.showError);
   }
 
   static showError(error) {

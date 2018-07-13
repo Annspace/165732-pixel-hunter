@@ -104,7 +104,6 @@ class GameScreen {
     } else {
       this.model.pushWrongAnswer();
     }
-    this.model.pushAllAnswers();
   }
 
   checkAnswersGameTwo(value) {
@@ -113,7 +112,6 @@ class GameScreen {
     } else {
       this.model.pushWrongAnswer();
     }
-    this.model.pushAllAnswers();
   }
 
   checkAnswersGameThree(url) {
@@ -135,7 +133,6 @@ class GameScreen {
     } else {
       this.model.pushWrongAnswer();
     }
-    this.model.pushAllAnswers();
   }
 
 
@@ -144,7 +141,7 @@ class GameScreen {
     this.model.resetTime();
     this.model.changeScreenIndex();
     if (this.model.endOfGames() || this.model.isDead()) {
-      Application.showStatistics(this.model.getResults, this.model.getLives);
+      Application.showStatistics(this.model);
       this.model.resetGame();
     } else {
       if (this.model.endOfCurrentGame()) {
